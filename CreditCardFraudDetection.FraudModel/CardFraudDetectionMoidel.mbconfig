@@ -1,0 +1,503 @@
+﻿{
+  "Scenario": "Classification",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "credit_card_fraud_1000.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "TransactionId",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "TransactionAmount",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "HourOfDay",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "MerchantCategory",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "EntryMode",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Country",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "IsInternational",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "CardPresent",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "DaysSinceLastTransaction",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "TransactionCount24h",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "AvgAmount7d",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Fraud",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LightGbmBinary",
+        "Score": 0.9324158382981913,
+        "RuntimeInSeconds": 0.174,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e4",
+          "e0": {
+            "OutputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ],
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "InputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country",
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e4": {
+            "NumberOfLeaves": 316,
+            "MinimumExampleCountPerLeaf": 21,
+            "LearningRate": 0.44543313225439596,
+            "NumberOfTrees": 4,
+            "SubsampleFraction": 0.60204656690431857,
+            "MaximumBinCountPerFeature": 294,
+            "FeatureFraction": 0.93937304004666744,
+            "L1Regularization": 2E-10,
+            "L2Regularization": 0.45467185374321739,
+            "LabelColumnName": "Fraud",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.93140573728809029,
+        "RuntimeInSeconds": 0.473,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ],
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "InputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country",
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 20,
+            "NumberOfTrees": 4,
+            "MaximumBinCountPerFeature": 254,
+            "FeatureFraction": 1.0,
+            "LearningRate": 0.099999999999999978,
+            "LabelColumnName": "Fraud",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestBinary",
+        "Score": 0.93140573728809029,
+        "RuntimeInSeconds": 0.244,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e7 * e8",
+          "e0": {
+            "OutputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ],
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "InputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country",
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e7": {
+            "NumberOfTrees": 4,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Fraud",
+            "FeatureColumnName": "Features"
+          },
+          "e8": {
+            "LabelColumnName": "Fraud",
+            "ScoreColumnName": "Score"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.93140573728809029,
+        "RuntimeInSeconds": 0.204,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ],
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "InputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country",
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 7,
+            "MinimumExampleCountPerLeaf": 22,
+            "NumberOfTrees": 5,
+            "MaximumBinCountPerFeature": 240,
+            "FeatureFraction": 0.94950762287861012,
+            "LearningRate": 0.10730165782722988,
+            "LabelColumnName": "Fraud",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeBinary",
+        "Score": 0.93140573728809029,
+        "RuntimeInSeconds": 0.198,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ],
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "InputColumnNames": [
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "MerchantCategory",
+              "EntryMode",
+              "Country",
+              "TransactionAmount",
+              "HourOfDay",
+              "IsInternational",
+              "CardPresent",
+              "DaysSinceLastTransaction",
+              "TransactionCount24h",
+              "AvgAmount7d"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 17,
+            "NumberOfTrees": 4,
+            "MaximumBinCountPerFeature": 268,
+            "FeatureFraction": 0.99999999,
+            "LearningRate": 0.093195205018186622,
+            "LabelColumnName": "Fraud",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "OneHotEncoding",
+      "e1": "ReplaceMissingValues",
+      "e2": "Concatenate",
+      "e3": "FastTreeBinary",
+      "e4": "LightGbmBinary",
+      "e5": "LbfgsLogisticRegressionBinary",
+      "e6": "SdcaLogisticRegressionBinary",
+      "e7": "FastForestBinary",
+      "e8": "Naive"
+    },
+    "Schema": "e0 * e1 * e2 * (e3 + e4 + e5 + e6 + e7 * e8)",
+    "MetricName": "Accuracy",
+    "ModelFilePath": "CardFraudDetectionMoidel.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Tuner": "eci-cfo",
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 300,
+    "OptimizeMetric": "MacroAccuracy",
+    "LabelColumn": "Fraud",
+    "AvailableTrainers": [
+      "SDCA",
+      "LBFGS",
+      "LGBM",
+      "FASTTREE",
+      "FASTFOREST"
+    ],
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}
